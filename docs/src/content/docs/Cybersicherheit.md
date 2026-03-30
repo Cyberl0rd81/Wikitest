@@ -3,6 +3,8 @@ title: Cybersicherheit
 description: Grundlagen, Ziele und zentrale Begriffe der Cybersicherheit
 ---
 
+![Nis2 Logo](../assets/NIS2-Landscape)
+
 ## Überblick
 
 **Cybersicherheit** bezeichnet alle Maßnahmen, die darauf abzielen,
