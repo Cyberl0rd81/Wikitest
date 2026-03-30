@@ -22,7 +22,7 @@ jobs:
         uses: withastro/action@v5
         with:
           path: docs
-          package-manager: npm@late
+          package-manager: npm@latest
 
   deploy:
     needs: build
