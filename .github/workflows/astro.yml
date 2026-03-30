@@ -1,23 +1,65 @@
-build:
+name: Deploy Docs (Astro Starlight) - Debug
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      # 1) Checkout des Repos
+      - name: Checkout
+        uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      # 2) Node einrichten
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'npm'
           cache-dependency-path: docs/package-lock.json
 
-      - name: Install (docs)
+      # 3) Debug: Zeige ob Lockfile da ist + welche Zod Version wirklich installiert wird
+      - name: Debug Zod resolution (docs)
         working-directory: docs
-        run: npm ci
+        run: |
+          echo "---- list docs directory ----"
+          ls -la
+          echo "---- lockfile present? ----"
+          ls -la package-lock.json || true
+          echo "---- npm ci (strict lockfile) ----"
+          npm ci
+          echo "---- zod version ----"
+          node -p "require('zod/package.json').version"
+          echo "---- npm ls zod ----"
+          npm ls zod || true
 
+      # 4) Build
       - name: Build (docs)
         working-directory: docs
         run: npm run build
 
+      # 5) Artifact fuer GitHub Pages hochladen
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
