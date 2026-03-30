@@ -1,12 +1,15 @@
 {
   "name": "docs",
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
-    "build": "astro build"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.25.0",
-    "astro": "^5.0.0"
+    "astro": "^5.0.0",
+    "@astrojs/starlight": "^0.36.0",
+    "sharp": "^0.34.0"
   }
 }
