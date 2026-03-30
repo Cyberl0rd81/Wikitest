@@ -5,10 +5,12 @@ export default defineConfig({
   site: 'https://cyberl0rd81.github.io',
   base: '/Wikitest',
 
+  trailingSlash: 'always',
+
   integrations: [
     starlight({
-      title: 'My Docs',
-      description: 'Documentation built with Astro Starlight',
-    }),
+      title: 'Wikitest Docs',
+      description: 'Documentation built with Astro Starlight'
+    })
   ],
 });
