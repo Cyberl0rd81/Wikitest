@@ -1,12 +1,15 @@
 {
-  "dependencies": {
-    "astro": "5.18.1",
-    "@astrojs/starlight": "0.36.3",
-    "sharp": "^0.34.0",
-    "zod": "3.25.76"
+  "name": "docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
   },
-  "overrides": {
-    "zod": "3.25.76",
-    "@astrojs/sitemap": "3.7.1"
+  "dependencies": {
+    "astro": "latest",
+    "@astrojs/starlight": "latest",
+    "sharp": "latest"
   }
 }
